@@ -138,6 +138,8 @@ module GitlabCi
       @process.environment['CI_SERVER_VERSION'] = nil# GitlabCi::Version
       @process.environment['CI_SERVER_REVISION'] = nil# GitlabCi::Revision
 
+      @process.environment['CI_PROJECT_ID'] = @project_id
+
       @process.environment['CI_BUILD_REF'] = @ref
       @process.environment['CI_BUILD_BEFORE_SHA'] = @before_sha
       @process.environment['CI_BUILD_REF_NAME'] = @ref_name
