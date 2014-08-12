@@ -112,7 +112,8 @@ module GitlabCi
 
     def default_options
       {
-        token: token
+        token: token,
+        ref: ENV["CI_RUNNER_REF"] || :master
       }
     end
   end
