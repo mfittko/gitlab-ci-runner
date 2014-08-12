@@ -18,6 +18,10 @@ module GitlabCi
       @config['token']
     end
 
+    def ref
+      @config['ref']
+    end
+
     def url
       @config['url']
     end

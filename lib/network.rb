@@ -106,6 +106,10 @@ module GitlabCi
       config.token
     end
 
+    def ref
+      config.ref || :master
+    end
+
     def config
       @config ||= Config.new
     end
@@ -113,7 +117,7 @@ module GitlabCi
     def default_options
       {
         token: token,
-        ref: ENV["CI_RUNNER_REF"] || :master
+        ref: ref
       }
     end
   end

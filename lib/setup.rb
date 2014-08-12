@@ -19,6 +19,13 @@ module GitlabCi
       end
 
       Config.new.write('url', url)
+
+      ref = ENV['CI_RUNNER_REF']
+      unless ref
+        puts 'Please enter the branch for this runner [master]'
+        ref = gets.chomp
+      end
+      Config.new.write('ref', ref)
     end
 
     def register_runner
