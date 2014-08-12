@@ -63,15 +63,7 @@ module GitlabCi
     def get_build
       build_data = network.get_build
       if build_data
-        if ENV["CI_RUNNER_REF"]
-          if ENV["CI_RUNNER_REF"] == build_data[:ref]
-            run(build_data)
-          else
-            false
-          end
-        else
-          run(build_data)
-        end
+        run(build_data)
       else
         false
       end
