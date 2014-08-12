@@ -24,6 +24,7 @@ module GitlabCi
       unless ref
         puts 'Please enter the branch for this runner [master]'
         ref = gets.chomp
+        ref = 'master' if ref == ''
       end
       Config.new.write('ref', ref)
     end
