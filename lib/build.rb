@@ -177,6 +177,7 @@ module GitlabCi
       cmd << "git clean -fdx"
       cmd << "git remote set-url origin #{@repo_url}"
       cmd << "git fetch origin"
+      cmd << "git fetch --tags"
       cmd.join(" && ")
     end
 
