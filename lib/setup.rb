@@ -14,7 +14,7 @@ module GitlabCi
     def build_config
       url = ENV['CI_SERVER_URL']
       unless url
-        puts 'Please enter the gitlab-ci coordinator URL (e.g. http://gitlab-ci.org:3000/ )'
+        puts 'Please enter the gitlab-ci coordinator URL (e.g. http://gitlab-ci.org/ )'
         url = gets.chomp
       end
 
@@ -34,13 +34,16 @@ module GitlabCi
 
       until registered
         token = ENV['REGISTRATION_TOKEN']
+        description = ENV['RUNNER_DESCRIPTION'] || Socket.gethostname
+        tag_list = ENV['RUNNER_TAG_LIST']
+
         unless token
           puts 'Please enter the gitlab-ci token for this runner: '
           token = gets.chomp
         end
 
-        puts "Registering runner with registration token: #{token}, url: #{Config.new.url}."
-        runner = Network.new.register_runner(token)
+        puts "Registering runner as #{description} with registration token: #{token}, url: #{Config.new.url}."
+        runner = Network.new.register_runner(token, description, tag_list)
 
         if runner
           write_token(runner[:token])
